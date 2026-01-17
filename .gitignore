@@ -1,0 +1,32 @@
+
+# Node
+node_modules/
+dist/
+.npm/
+
+# Python venv
+backend/.venv/
+backend/__pycache__/
+**/__pycache__/
+
+# SQLite DB
+backend/*.db
+backend/*.sqlite
+backend/*.sqlite3
+
+# Environment files
+*.env
+backend/.env
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# IDE/Editor
+.vscode/
+.idea/
+*.code-workspace
