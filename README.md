@@ -1,17 +1,25 @@
-# Library Book Management System
+# **Library Book Management System**
 
-A simple full‑stack app to manage library **books** and **issue/return** records.
+A simple full‑stack application to manage **books** and **issue/return** records.
 
-*   **Backend:** FastAPI, SQLAlchemy, SQLite
-*   **Frontend:** React, TypeScript, Vite
-*   **Features:**
-    *   CRUD Books
-    *   Issue a book / Return a book
-    *   View book list and issue history
+### **Tech Stack**
+
+*   **Backend:** FastAPI + SQLAlchemy + SQLite
+*   **Frontend:** React + TypeScript + Vite
+*   **Database:** SQLite (integer IDs for books & issues)
+
+### **Features**
+
+*   Add / Update / Delete books
+*   Issue a book to a student
+*   Return a book
+*   View book list
+*   View issued and returned history
+*   Search books instantly while typing
 
 ***
 
-## 📁 Project Structure
+# 📁 **Project Structure**
 
     library-system/
     ├─ backend/
@@ -36,49 +44,56 @@ A simple full‑stack app to manage library **books** and **issue/return** recor
           ├─ types.ts
           ├─ styles.css
           └─ components/
-             ├─ BookList.tsx
-             ├─ IssueForm.tsx
-             └─ IssueHistory.tsx
+             ├─ SectionBookList.tsx
+             ├─ SectionAddBook.tsx
+             ├─ SectionUpdateBook.tsx
+             ├─ SectionDeleteBook.tsx
+             ├─ SectionIssueBook.tsx
+             ├─ SectionReturnBook.tsx
+             ├─ SectionIssuedList.tsx
+             └─ SectionReturnedList.tsx
 
 ***
 
-## ✅ Prerequisites
+# ✅ **Prerequisites**
 
-*   **Python** 3.10+ (3.11 recommended)
-*   **Node.js** 18+ (20 recommended) and **npm**
-*   **Git**
-*   **VS Code** (optional but recommended)
+*   Python **3.10+**
+*   Node.js **18 or 20+**
+*   npm
+*   Git
+*   VS Code
 
 ***
 
-## 🚀 Quick Start
+# 🚀 **Quick Start**
 
-### 1) Clone or Create the Project
+## **1) Create the project folder**
 
-If you already created the files locally, skip to step 2.
+If not already created:
 
 ```bash
-# Create root folder
 mkdir library-system && cd library-system
 ```
 
-Open **VS Code**:
+Open in VS Code:
 
 ```bash
 code .
 ```
 
-> Create the folders/files as shown in the project structure (copy-paste code from your chat into the files).
+Create the folder structure shown above.
 
 ***
 
-### 2) Backend Setup
+# **2) Backend Setup**
 
 ```bash
 cd backend
 python -m venv .venv
+
 # Windows
 .\.venv\Scripts\activate
+
 # macOS/Linux
 # source .venv/bin/activate
 
@@ -86,13 +101,14 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8080
 ```
 
-*   API docs: <http://localhost:8080/docs>
+Backend API Docs:  
+👉 <http://localhost:8080/docs>
 
 ***
 
-### 3) Frontend Setup
+# **3) Frontend Setup**
 
-Open a **new terminal** at project root, then:
+Open a **new terminal** in root:
 
 ```bash
 cd frontend
@@ -100,42 +116,67 @@ npm install
 npm run dev
 ```
 
-*   Frontend: <http://localhost:5173>
+Frontend runs at:  
+👉 <http://localhost:5173>
 
 ***
 
-## 🧪 How to Use
+# 🧪 **How to Use**
 
-### Add a Book (UI)
+## **Add a Book**
 
-*   In the page, use the “Book List” form to add **Title**, **Author**, and **Available copies**.
+*   Open app
+*   Click **Add Book**
+*   Enter title, author, available copies
+*   Click **Add**
 
-### Issue a Book (UI)
+## **Issue a Book**
 
-*   Select any book with **available copies > 0**
-*   Enter **student name**
+*   Click **Issue Book**
+*   Select a book with available copies
+*   Enter student name
 *   Click **Issue**
 
-### Return a Book (UI)
+## **Return a Book**
 
-*   Go to **Issue History**
-*   Filter by **Issued**
-*   Click **Return** on a row to return that book
+*   Click **Return Book**
+*   Select a student
+*   Their issued (not returned) books appear
+*   Click **Return**
 
-## 🧾 API Endpoints (Summary)
+## **Book List**
 
-### Books
+*   Click **Book List**
+*   Use the search bar to filter instantly
 
-*   `GET /api/books/` → list all books
-*   `GET /api/books/{id}` → get one book
-*   `POST /api/books/` → create book
-*   `PUT /api/books/{id}` → update book
-*   `DELETE /api/books/{id}` → delete book
+## **Issued List**
 
-### Issues
+*   Click **Issued List**
+*   Shows active (not returned) issues
 
-*   `GET /api/issues?status_q=Issued|Returned` → list issues (filter optional)
-*   `POST /api/issues/` → issue a book `{book_id, student_name}`
-*   `POST /api/issues/{issue_id}/return` → return a book
+## **Returned List**
+
+*   Click **Returned List**
+*   Shows all returned items
 
 ***
+
+# 🧾 **API Endpoints (Summary)**
+
+## **Books**
+
+    GET    /api/books/        → list books
+    GET    /api/books/{id}    → get book
+    POST   /api/books/        → create book
+    PUT    /api/books/{id}    → update book
+    DELETE /api/books/{id}    → delete book
+
+## **Issues**
+
+    GET    /api/issues               → list all issues
+    GET    /api/issues?status_q=Issued
+    GET    /api/issues?status_q=Returned
+    POST   /api/issues/              → issue a book
+    POST   /api/issues/{id}/return   → return a book
+    GET    /api/issues/students      → list students with open issues
+    GET    /api/issues/open_by_student?student_name=NAME
