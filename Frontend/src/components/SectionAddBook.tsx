@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { api } from "../api";
 import { BookOut } from "../types";
@@ -32,14 +31,22 @@ export default function SectionAddBook({
       setMsg("Book already exists");
       return;
     }
+    let n = 0;
+    if (copies.trim() !== "") {
+      const v = Number(copies);
+      if (!Number.isInteger(v) || v < 0) {
+        setMsg("Invalid available copies");
+        return;
+      }
+      n = v;
+    }
     setBusy(true);
     setMsg("");
-    const n = copies.trim() ? parseInt(copies, 10) : 0;
     try {
       await api.post("/api/books/", {
         title: title.trim(),
         author: author.trim(),
-        available_copies: isNaN(n) ? 0 : n,
+        available_copies: n,
       });
       setTitle("");
       setAuthor("");

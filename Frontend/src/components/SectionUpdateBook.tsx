@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { api } from "../api";
 import { BookOut } from "../types";
@@ -43,7 +42,14 @@ export default function SectionUpdateBook({
     const payload: any = {};
     if (title.trim()) payload.title = title.trim();
     if (author.trim()) payload.author = author.trim();
-    if (copies.trim()) payload.available_copies = isNaN(parseInt(copies, 10)) ? 0 : parseInt(copies, 10);
+    if (copies.trim() !== "") {
+      const n = Number(copies);
+      if (!Number.isInteger(n) || n < 0) {
+        setMsg("Invalid available copies");
+        return;
+      }
+      payload.available_copies = n;
+    }
     if (Object.keys(payload).length === 0) {
       setMsg("Nothing to update");
       return;

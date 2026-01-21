@@ -58,7 +58,7 @@ export default function App() {
   return (
     <div className="container">
       <Notice message={notice} onClose={() => setNotice("")} />
-      <h1>Library Book Management</h1>
+      <h1>Library Book Management System</h1>
 
       <div className="btnbar">
         <button onClick={() => setSection("book_list")}>Book List</button>
